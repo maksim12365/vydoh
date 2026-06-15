@@ -15,13 +15,16 @@
             line-height: 1.6;
         }
 
-        /* АНИМИРОВАННЫЙ ФОН */
+        /* АНИМИРОВАННЫЙ ФОН — ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ */
         .bg-animation {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
             overflow: hidden;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .bg-animation::before {
@@ -34,12 +37,18 @@
             background: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=2560&q=80') center/cover;
             opacity: 0.4;
             animation: forestMove 60s ease-in-out infinite;
+            -webkit-animation: forestMove 60s ease-in-out infinite;
         }
 
         @keyframes forestMove {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(-30px, -30px) scale(1.1); }
             66% { transform: translate(30px, 30px) scale(0.9); }
+        }
+
+        @-webkit-keyframes forestMove {
+            0%, 100% { -webkit-transform: translate(0, 0) scale(1); }            33% { -webkit-transform: translate(-30px, -30px) scale(1.1); }
+            66% { -webkit-transform: translate(30px, 30px) scale(0.9); }
         }
 
         .overlay {
@@ -61,6 +70,7 @@
             text-align: center;
             padding: 120px 0 80px;
             animation: fadeInDown 1.5s ease-out;
+            -webkit-animation: fadeInDown 1.5s ease-out;
         }
 
         h1 {
@@ -72,6 +82,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: glow 3s ease-in-out infinite alternate;
+            -webkit-animation: glow 3s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
@@ -85,7 +96,7 @@
             letter-spacing: 5px;
             opacity: 0;
             animation: fadeIn 2s ease-out 0.5s forwards;
-        }
+            -webkit-animation: fadeIn 2s ease-out 0.5s forwards;        }
 
         /* ПОСТЕР С ЭФФЕКТОМ */
         .poster-section {
@@ -93,6 +104,7 @@
             margin: 60px 0;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1s forwards;
+            -webkit-animation: fadeInUp 1.5s ease-out 1s forwards;
         }
 
         .poster-container {
@@ -103,10 +115,12 @@
             border-radius: 8px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             transition: transform 0.5s ease;
+            -webkit-transition: transform 0.5s ease;
         }
 
         .poster-container:hover {
             transform: translateY(-10px);
+            -webkit-transform: translateY(-10px);
         }
 
         .poster-placeholder {
@@ -120,18 +134,18 @@
             font-size: 1.1rem;
         }
 
-        /* КАРУСЕЛЬ */
+        /* КАРУСЕЛЬ — ИСПРАВЛЕНО */
         .carousel-section {
             margin: 100px 0;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1.2s forwards;
+            -webkit-animation: fadeInUp 1.5s ease-out 1.2s forwards;
         }
 
         .carousel-title {
             text-align: center;
             font-size: 1.5rem;
-            letter-spacing: 8px;
-            margin-bottom: 40px;
+            letter-spacing: 8px;            margin-bottom: 40px;
             color: #a8b59a;
         }
 
@@ -146,6 +160,7 @@
         .carousel-track {
             display: flex;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .carousel-item {
@@ -157,12 +172,30 @@
             justify-content: center;
             color: rgba(255,255,255,0.4);
             font-size: 1.2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ИСПРАВЛЕНО: Стили для изображений в карусели */
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        .carousel-item a {
+            width: 100%;
+            height: 100%;
+            display: block;
+            text-decoration: none;
         }
 
         .carousel-btn {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 50%;            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
             background: rgba(255,255,255,0.1);
             border: none;
             color: white;
@@ -170,7 +203,9 @@
             cursor: pointer;
             font-size: 1.5rem;
             transition: all 0.3s;
+            -webkit-transition: all 0.3s;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .carousel-btn:hover {
@@ -185,6 +220,7 @@
             margin: 100px 0;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1.4s forwards;
+            -webkit-animation: fadeInUp 1.5s ease-out 1.4s forwards;
         }
 
         .info-grid {
@@ -200,12 +236,14 @@
             text-align: center;
             border-top: 3px solid #8b9a7d;
             transition: all 0.4s ease;
+            -webkit-transition: all 0.4s ease;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .info-card:hover {
             transform: translateY(-8px);
-            background: rgba(255,255,255,0.08);
+            -webkit-transform: translateY(-8px);            background: rgba(255,255,255,0.08);
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
@@ -231,7 +269,9 @@
             border-left: 4px solid #8b9a7d;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1.6s forwards;
+            -webkit-animation: fadeInUp 1.5s ease-out 1.6s forwards;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .about-section h2 {
@@ -252,11 +292,11 @@
             font-weight: 300;
         }
 
-        /* ТРЕЙЛЕР */
-        .trailer-section {
+        /* ТРЕЙЛЕР */        .trailer-section {
             margin: 100px 0;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1.8s forwards;
+            -webkit-animation: fadeInUp 1.5s ease-out 1.8s forwards;
         }
 
         .trailer-container {
@@ -301,8 +341,7 @@
             }
         }
 
-        @keyframes fadeInUp {
-            from {
+        @keyframes fadeInUp {            from {
                 opacity: 0;
                 transform: translateY(30px);
             }
@@ -312,13 +351,33 @@
             }
         }
 
-        /* АДАПТИВНОСТЬ */
+        /* АДАПТИВНОСТЬ — ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; letter-spacing: 10px; }
             .subtitle { font-size: 1rem; letter-spacing: 3px; }
+            
+            /* Фон на мобильных упрощён для производительности */
+            .bg-animation::before {
+                animation: none;
+                -webkit-animation: none;
+                transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+            }
+            
             .carousel-item { height: 300px; }
+            .carousel-btn {
+                padding: 10px 15px;
+                font-size: 1.2rem;
+            }
             .about-section { padding: 30px; }
             .info-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; letter-spacing: 5px; }
+            .carousel-item { height: 250px; }
+            .poster-placeholder { height: 400px; }
         }
     </style>
 </head>
@@ -331,8 +390,7 @@
         
         <!-- ЗАГОЛОВОК -->
         <header>
-            <h1>ВЫДОХ</h1>
-            <p class="subtitle">ИСТОРИЯ ОДНОГО ПОБЕГА В ЛЕС</p>
+            <h1>ВЫДОХ</h1>            <p class="subtitle">ИСТОРИЯ ОДНОГО ПОБЕГА В ЛЕС</p>
         </header>
 
         <!-- ПОСТЕР -->
@@ -349,10 +407,18 @@
             <h2 class="carousel-title">КАДРЫ ИЗ ФИЛЬМА</h2>
             <div class="carousel">
                 <div class="carousel-track" id="carouselTrack">
-                    <div class="carousel-item"><a href="https://ibb.co/Q7Vh5V8s"><img src="https://i.ibb.co/nqy4Wy3h/i.jpg" alt="i" border="0" /></a></div>
-                    <div class="carousel-item"><a href="https://ibb.co/YwhRqM6"><img src="https://i.ibb.co/XMt2vg9/01-stock-photo-antique-oil-lamp.jpg" alt="01-stock-photo-antique-oil-lamp" border="0" /></a></div>
-                    <div class="carousel-item"><a href="https://ibb.co/tVhc587"><img src="https://i.ibb.co/81B2V6W/908566-main.jpg" alt="908566-main" border="0" /></a></div>
-                    <div class="carousel-item"><a href="https://ibb.co/WvxpdgS3"><img src="https://i.ibb.co/yFfBMWLR/914416-main.jpg" alt="914416-main" border="0" /></a></div>
+                    <div class="carousel-item">
+                        <img src="https://i.ibb.co/nqy4Wy3h/i.jpg" alt="Кадр 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://i.ibb.co/XMt2vg9/01-stock-photo-antique-oil-lamp.jpg" alt="Кадр 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://i.ibb.co/81B2V6W/908566-main.jpg" alt="Кадр 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://i.ibb.co/yFfBMWLR/914416-main.jpg" alt="Кадр 4">
+                    </div>
                 </div>
                 <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
                 <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
@@ -373,8 +439,7 @@
                 <div class="info-card">
                     <h3>Жанр</h3>
                     <p>Slow Cinema<br>Atmospheric Drama</p>
-                </div>
-                <div class="info-card">
+                </div>                <div class="info-card">
                     <h3>Язык</h3>
                     <p>Русский<br>+ субтитры</p>
                 </div>
@@ -423,8 +488,7 @@
         // КАРУСЕЛЬ
         let currentIndex = 0;
         const track = document.getElementById('carouselTrack');
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
+        const items = document.querySelectorAll('.carousel-item');        const totalItems = items.length;
 
         function moveCarousel(direction) {
             currentIndex += direction;
@@ -437,6 +501,7 @@
             
             const offset = -currentIndex * 100;
             track.style.transform = `translateX(${offset}%)`;
+            track.style.webkitTransform = `translateX(${offset}%)`;
         }
 
         // Автоматическое переключение каждые 5 секунд
@@ -455,6 +520,7 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.webkitTransform = 'translateY(0)';
                 }
             });
         }, observerOptions);
@@ -463,6 +529,7 @@
         document.querySelectorAll('.info-card, .about-section').forEach(section => {
             section.style.opacity = '0';
             section.style.transform = 'translateY(20px)';
+            section.style.webkitTransform = 'translateY(20px)';
             section.style.transition = 'all 0.6s ease-out';
             observer.observe(section);
         });
